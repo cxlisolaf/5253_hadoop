@@ -9,8 +9,11 @@ Leave this part as-is:
 
 Grade
 Part A:
+
 Part B:
+
 Part C:
+
 Total: 
 
 Grader notes:
