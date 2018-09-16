@@ -14,11 +14,11 @@ public class WordCountMapper extends Mapper<LongWritable, Text, Text, IntWritabl
     private final static IntWritable one = new IntWritable(1);
     private Text word = new Text();
     
-    public void map(LongWritable key, Text value, Context context)
+    public void map(LongWritable key, Text input, Context context)
 			throws IOException, InterruptedException {
 		
 		String delimiter = " ";
-		StringTokenizer tokens = new StringTokenizer(value.toString(), delimiter);
+		StringTokenizer tokens = new StringTokenizer(input.toString(), delimiter);
 		
 		while(tokens.hasMoreTokens()){
 			word.set(tokens.nextToken());
