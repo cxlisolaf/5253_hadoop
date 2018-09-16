@@ -2,5 +2,20 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.cs5253</groupId>
   <artifactId>project1b</artifactId>
-  <version>0.0.1</version>
+  <version>0.1</version>
+  
+   	<properties>
+		 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		 <hadoop.version>2.7.3</hadoop.version>
+	</properties>
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-client</artifactId>
+			<version>${hadoop.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+	
 </project>
