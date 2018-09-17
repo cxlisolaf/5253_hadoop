@@ -25,7 +25,7 @@ wget https://s3-us-west-2.amazonaws.com/cs5253-project1/${INPUT_FILE}
 # Decompress input file
 echo ----------------------------------------------------------
 echo Decompressing input file...
-unzip ${DOWNLOAD_FILE}
+unzip -j ${DOWNLOAD_FILE}
 rm ${DOWNLOAD_FILE}
 
 # Move data file to hdfs

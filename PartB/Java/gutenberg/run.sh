@@ -28,10 +28,15 @@ echo ----------------------------------------------------------
 echo Moving input file to hdfs...
 hdfs dfs -moveFromLocal ./${INPUT_FILE} /input
 
+# Installing 7z 
+echo ----------------------------------------------------------
+echo Installing 7z...
+sudo apt install p7zip-full
+
 # Decompress input file
 echo ----------------------------------------------------------
-echo Extracting ZIP file...
-unzip ${DOWNLOAD_FILE}
+echo Extracting 7z file...
+7z e ${DOWNLOAD_FILE}
 rm ${DOWNLOAD_FILE}
 echo Extracting TAR file...
 tar -xvf ${TAR_FILE}
