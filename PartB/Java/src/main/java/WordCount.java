@@ -11,17 +11,17 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  *  WordCount class based on cs5253 WordCount example
  *
  *  Usage:
- *  	hadoop jar ./project1b-0.1.jar WordCount inputPath outputPath
+ *  	hadoop jar ./project1b-0.1.jar WordCount inputPath outputPath stopwordfilepath
  *
  * 	Example:
- * 		hadoop jar ./project1b-0.1.jar WordCount s3://cs5253-project1/PartB/input s3://cs5253-project1/PartB/output
+ * 		hadoop jar ./project1b-0.1.jar WordCount s3://cs5253-project1/PartB/input s3://cs5253-project1/PartB/output xxx/stopword.txt
  */
 
 public class WordCount extends Configured {
 
 	public static void main(String[] args) throws Exception{
 
-		if (args.length != 2) {
+		if (args.length != 3) {
 			System.err.printf("Error: Missing argument(s): inputPath outputPath\n");
 			System.exit(1);;
 		}
@@ -33,8 +33,11 @@ public class WordCount extends Configured {
 		job.setReducerClass(WordCountReducer.class);
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(IntWritable.class);
+
 		FileInputFormat.addInputPath(job, new Path(args[0]));
 		FileOutputFormat.setOutputPath(job, new Path(args[1]));
+		job.addCacheFile(new Path(args[2]).toUri());
+
 		System.exit(job.waitForCompletion(true) ? 0 : 1);
 	}
 }
