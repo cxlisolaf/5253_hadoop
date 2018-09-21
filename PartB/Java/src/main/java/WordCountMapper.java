@@ -58,7 +58,7 @@ public class WordCountMapper extends Mapper<LongWritable, Text, Text, IntWritabl
         while (tokens.hasMoreTokens()) {
 
             String wordString = tokens.nextToken();
-            if (!stopWords.contains(wordString)) {
+            if (!stopWords.contains(wordString) && wordString != "") {
                 word.set(wordString);
                 context.write(word, one);
             }
