@@ -1,6 +1,7 @@
 #!/bin/bash
 
 INPUT_FILE=quotes.list
+JAR_FILE=wordcount.jar
 
 # Remove Existing Output
 echo ----------------------------------------------------------
@@ -20,10 +21,15 @@ echo ----------------------------------------------------------
 echo Copying input file to hdfs...
 hdfs dfs -copyFromLocal ./input/${INPUT_FILE} /input
 
+# Move stopword file to hdfs
+echo ----------------------------------------------------------
+echo Copying stopword file to hdfs...
+hdfs dfs -copyFromLocal ../stopword.txt /user
+
 # Run Hadoop job
 echo ----------------------------------------------------------
 echo Running Hadoop job...
-hadoop jar ../project1b-0.1.jar WordCount /input /output
+hadoop jar ../${JAR_FILE} WordCount /input /output /user/stopword.txt
 
 # Move output data to local file system
 echo ----------------------------------------------------------

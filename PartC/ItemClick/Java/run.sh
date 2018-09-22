@@ -1,7 +1,7 @@
 #!/bin/bash
 
 INPUT_FILE=clicks.txt
-JAR_FILE=ItemClick.jar
+JAR_FILE=itemclick.jar
 
 # Remove Existing Output
 echo ----------------------------------------------------------

@@ -1,6 +1,7 @@
 #!/bin/bash
 
-INPUT_DIR= s3://wordcount-datasets
+INPUT_DIR=s3://wordcount-datasets/
+JAR_FILE=wordcount.jar
 
 # Remove Existing Output
 echo ----------------------------------------------------------
@@ -14,10 +15,15 @@ echo ----------------------------------------------------------
 echo Creating directories...
 mkdir output
 
+# Move stopword file to hdfs
+echo ----------------------------------------------------------
+echo Copying stopword file to hdfs...
+hdfs dfs -copyFromLocal ../stopword.txt /user
+
 # Run Hadoop job
 echo ----------------------------------------------------------
 echo Running Hadoop job...
-hadoop jar ../project1b-0.1.jar WordCount ${INPUT_DIR} /output
+hadoop jar ../${JAR_FILE} WordCount ${INPUT_DIR} /output /user/stopword.txt
 
 # Move output data to local file system
 echo ----------------------------------------------------------
