@@ -1,6 +1,7 @@
 #!/bin/bash
 
 INPUT_FILE=clicks.txt
+JAR_FILE=ItemClick.jar
 
 # Remove Existing Output
 echo ----------------------------------------------------------
@@ -23,7 +24,7 @@ hdfs dfs -copyFromLocal ./input/${INPUT_FILE} /input
 # Run Hadoop job
 echo ----------------------------------------------------------
 echo Running Hadoop job...
-hadoop jar ./project1c-itemClick-0.1.jar ItemClick /input /output
+hadoop jar ./${JAR_FILE} ItemClick /input /output
 
 # Move output data to local file system
 echo ----------------------------------------------------------
