@@ -23,7 +23,7 @@ hdfs dfs -moveFromLocal ./${INPUT_FILE} /input
 # Run Hadoop job
 echo ----------------------------------------------------------
 echo Running Hadoop job...
-hadoop jar ../project1b-0.1.jar WordCount /input /output
+hadoop jar ../project1c-itemClick-0.1.jar ItemClick /input /output
 
 # Move output data to local file system
 echo ----------------------------------------------------------
