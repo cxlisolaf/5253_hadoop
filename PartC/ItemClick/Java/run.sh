@@ -18,7 +18,7 @@ hdfs dfs -mkdir /input
 # Move data file to hdfs
 echo ----------------------------------------------------------
 echo Moving input file to hdfs...
-hdfs dfs -moveFromLocal ./${INPUT_FILE} /input
+hdfs dfs -moveFromLocal ./input/${INPUT_FILE} /input
 
 # Run Hadoop job
 echo ----------------------------------------------------------
