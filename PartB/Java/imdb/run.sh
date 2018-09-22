@@ -1,6 +1,5 @@
 #!/bin/bash
 
-DOWNLOAD_FILE=quotes.list.gz
 INPUT_FILE=quotes.list
 
 # Remove Existing Output
@@ -13,25 +12,13 @@ rm output.tar.gz
 # Create directories
 echo ----------------------------------------------------------
 echo Creating directories...
-mkdir input
 mkdir output
 hdfs dfs -mkdir /input
 
-# Download input file
-echo ----------------------------------------------------------
-echo Retrieving input file...
-wget https://s3-us-west-2.amazonaws.com/cs5253-project1/${DOWNLOAD_FILE}
-
-# Decompress input file
-echo ----------------------------------------------------------
-echo Decompressing input file...
-gunzip ${DOWNLOAD_FILE}
-rm ${DOWNLOAD_FILE}
-
 # Move data file to hdfs
 echo ----------------------------------------------------------
-echo Moving input file to hdfs...
-hdfs dfs -moveFromLocal ./${INPUT_FILE} /input
+echo Copying input file to hdfs...
+hdfs dfs -copyFromLocal ./input/${INPUT_FILE} /input
 
 # Run Hadoop job
 echo ----------------------------------------------------------

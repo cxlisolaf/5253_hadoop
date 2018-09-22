@@ -1,8 +1,6 @@
 #!/bin/bash
 
-DOWNLOAD_FILE=gutenberg_txt.7z
-TAR_FILE=gutenberg_txt.tar
-INPUT_FILE=gutenberg.txt
+INPUT_DIR= s3://csci5253-gutenberg-dataset
 
 # Remove Existing Output
 echo ----------------------------------------------------------
@@ -14,38 +12,12 @@ rm output.tar.gz
 # Create directories
 echo ----------------------------------------------------------
 echo Creating directories...
-mkdir input
 mkdir output
-hdfs dfs -mkdir /input
-
-# Download input file
-echo ----------------------------------------------------------
-echo Retrieving input file...
-wget https://s3-us-west-2.amazonaws.com/cs5253-project1/${INPUT_FILE}
-
-# Move data file to hdfs
-echo ----------------------------------------------------------
-echo Moving input file to hdfs...
-hdfs dfs -moveFromLocal ./${INPUT_FILE} /input
-
-# Installing 7z 
-echo ----------------------------------------------------------
-echo Installing 7z...
-sudo apt install p7zip-full
-
-# Decompress input file
-echo ----------------------------------------------------------
-echo Extracting 7z file...
-7z e ${DOWNLOAD_FILE}
-rm ${DOWNLOAD_FILE}
-echo Extracting TAR file...
-tar -xvf ${TAR_FILE}
-rm ${TAR_FILE}
 
 # Run Hadoop job
 echo ----------------------------------------------------------
 echo Running Hadoop job...
-hadoop jar ../project1b-0.1.jar WordCount /input /output
+hadoop jar ../project1b-0.1.jar WordCount ${INPUT_DIR} /output
 
 # Move output data to local file system
 echo ----------------------------------------------------------
