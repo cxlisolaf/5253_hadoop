@@ -3,7 +3,7 @@
 JAR_FILE=wordcount.jar
 TOP2K_JAR_FILE=top2k.jar
 CLASS=WordCount
-CLASS_TOP2K
+CLASS_TOP2K=Top2k
 LOCAL_INPUT=./input
 LOCAL_OUTPUT=./output
 HDFS_INPUT=s3://csci5253-gutenberg-dataset/
