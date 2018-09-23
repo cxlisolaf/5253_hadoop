@@ -7,7 +7,7 @@
 	<version>0.1</version>
 	<packaging>jar</packaging>
 	<build>
-		<finalName>timeblocks</finalName>
+		<finalName>TimeBlocks</finalName>
 	</build>
 	
 	<properties>

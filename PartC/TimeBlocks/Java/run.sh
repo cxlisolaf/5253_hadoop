@@ -1,25 +1,22 @@
 #!/bin/bash
 
 INPUT_FILE=buys.txt
-JAR_FILE=timeblocks.jar
+JAR_FILE=TimeBlocks.jar
 CLASS=TimeBlocks
 LOCAL_INPUT=./input
-LOCAL_OUTPUT=./output
+LOCAL_OUTPUT=./output.txt
 HDFS_INPUT=/input
 HDFS_OUTPUT=/output
-GZIP_OUTPUT=output.tar.gz
 
 # Remove Existing Output
 echo ----------------------------------------------------------
 echo Remove existing output files...
 hdfs dfs -rm -r ${HDFS_OUTPUT}
-rm -r ${LOCAL_OUTPUT}
-rm ${GZIP_OUTPUT}
+rm ${LOCAL_OUTPUT}
 
 # Create directories
 echo ----------------------------------------------------------
 echo Creating directories...
-mkdir ${LOCAL_OUTPUT}
 hdfs dfs -mkdir ${HDFS_INPUT}
 
 # Move data file to hdfs
@@ -35,12 +32,7 @@ hadoop jar ./${JAR_FILE} ${CLASS} ${HDFS_INPUT} ${HDFS_OUTPUT}
 # Move output data to local file system
 echo ----------------------------------------------------------
 echo Copying output files...
-hdfs dfs -copyToLocal ${HDFS_OUTPUT}/* ${LOCAL_OUTPUT}
-
-# Create compressed output file
-echo ----------------------------------------------------------
-echo Compressing output files...
-cd ${LOCAL_OUTPUT} && tar -zcvf ../${GZIP_OUTPUT} part-* && cd -
+hdfs dfs -copyToLocal ${HDFS_OUTPUT}/p* ${LOCAL_OUTPUT}
 
 # Cleanup hdfs files
 echo ----------------------------------------------------------
@@ -51,8 +43,8 @@ hdfs dfs -rm -r ${HDFS_OUTPUT}
 # Verifying results
 echo ----------------------------------------------------------
 echo Verifying results...
-FILE_COUNT=`ls -1 ${LOCAL_OUTPUT}/p* | wc -l`
-LINE_COUNT=`cat ${LOCAL_OUTPUT}/p* | wc -l`
+FILE_COUNT=`ls -1 ${LOCAL_OUTPUT} | wc -l`
+LINE_COUNT=`cat ${LOCAL_OUTPUT} | wc -l`
 echo Output File Count: ${FILE_COUNT}
 echo Output Line Count: ${LINE_COUNT}
 
