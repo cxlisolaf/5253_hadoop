@@ -2,16 +2,17 @@
 
 DOWNLOAD_FILE=quotes.list.gz
 INPUT_FILE=quotes.list
+LOCAL_INPUT=./input
 
 # Remove old input data
 echo ----------------------------------------------------------
 echo Removing old input data
-rm -r ./input
+rm -r ${LOCAL_INPUT}
 
 # Create directories
 echo ----------------------------------------------------------
 echo Creating input directory...
-mkdir ./input
+mkdir ${LOCAL_INPUT}
 
 # Download input file
 echo ----------------------------------------------------------
@@ -27,7 +28,7 @@ rm ${DOWNLOAD_FILE}
 # Copy input into input dir
 echo ----------------------------------------------------------
 echo Moving input data into input dir...
-mv ./${INPUT_FILE} ./input
+mv ./${INPUT_FILE} ${LOCAL_INPUT}
 
 echo ----------------------------------------------------------
 echo Finished
