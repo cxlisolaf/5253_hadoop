@@ -3,6 +3,7 @@
 JAR_FILE=wordcount.jar
 TOP2K_JAR_FILE=top2k.jar
 CLASS=WordCount
+CLASS_TOP2K=Top2k
 LOCAL_INPUT=./input
 LOCAL_OUTPUT=./output
 HDFS_INPUT=s3://wordcount-datasets/
@@ -38,12 +39,12 @@ hadoop jar ../${JAR_FILE} ${CLASS} ${HDFS_INPUT} ${HDFS_OUTPUT1} ${HDFS_STOPWORD
 echo ----------------------------------------------------------
 echo Running Top2K Hadoop job...
 hdfs dfs -rm ${HDFS_OUTPUT1}/_S*
-hadoop jar ../${TOP2K_JAR_FILE} ${CLASS} ${HDFS_OUTPUT1} ${HDFS_OUTPUT2}
+hadoop jar ../${TOP2K_JAR_FILE} ${CLASS_TOP2K} ${HDFS_OUTPUT1} ${HDFS_OUTPUT2}
 
 # Move output data to local file system
 echo ----------------------------------------------------------
 echo Copying output files...
-hdfs dfs -copyToLocal ${HDFS_OUTPUT}/* ${LOCAL_OUTPUT}
+hdfs dfs -copyToLocal ${HDFS_OUTPUT2}/* ${LOCAL_OUTPUT}
 
 # Create compressed output file
 echo ----------------------------------------------------------
@@ -53,7 +54,6 @@ cd ${LOCAL_OUTPUT} && tar -zcvf ../${GZIP_OUTPUT} part-* && cd -
 # Cleanup hdfs files
 echo ----------------------------------------------------------
 echo Cleaning up hdfs...
-hdfs dfs -rm -r ${HDFS_INPUT}
 hdfs dfs -rm -r ${HDFS_OUTPUT1}
 hdfs dfs -rm -r ${HDFS_OUTPUT2}
 

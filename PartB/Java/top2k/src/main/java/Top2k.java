@@ -7,17 +7,8 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
-/*
- *  WordCount class based on cs5253 WordCount example
- *
- *  Usage:
- *  	hadoop jar ./project1b-0.1.jar WordCount inputPath outputPath
- *
- * 	Example:
- * 		hadoop jar ./project1b-0.1.jar WordCount s3://cs5253-project1/PartB/input s3://cs5253-project1/PartB/output
- */
 
-public class ItemClick extends Configured {
+public class Top2k extends Configured {
 
 	public static void main(String[] args) throws Exception{
 
@@ -28,9 +19,9 @@ public class ItemClick extends Configured {
 		
 		Configuration conf = new Configuration();
 		Job job = Job.getInstance(conf, "word count");
-		job.setJarByClass(ItemClick.class);
-		job.setMapperClass(ItemClickMapper.class);
-		job.setReducerClass(ItemClickReducer.class);
+		job.setJarByClass(Top2k.class);
+		job.setMapperClass(Top2kMapper.class);
+		job.setReducerClass(Top2kReducer.class);
 		job.setNumReduceTasks(1);
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(IntWritable.class);

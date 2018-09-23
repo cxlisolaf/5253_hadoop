@@ -31,6 +31,7 @@ public class TimeBlocks extends Configured {
 		job.setJarByClass(TimeBlocks.class);
 		job.setMapperClass(TimeBlocksMapper.class);
 		job.setReducerClass(TimeBlocksReducer.class);
+		job.setNumReduceTasks(1);
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(IntWritable.class);
 		FileInputFormat.addInputPath(job, new Path(args[0]));
