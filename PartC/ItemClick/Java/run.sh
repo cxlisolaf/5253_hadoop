@@ -48,6 +48,14 @@ echo Cleaning up hdfs...
 hdfs dfs -rm -r ${HDFS_INPUT}
 hdfs dfs -rm -r ${HDFS_OUTPUT}
 
+# Verifying results
+echo ----------------------------------------------------------
+echo Verifying results...
+FILE_COUNT=`ls -1 ${LOCAL_OUTPUT}/p* | wc -l`
+LINE_COUNT=`cat ${LOCAL_OUTPUT}/p* | wc -l`
+echo Output File Count: ${FILE_COUNT}
+echo Output Line Count: ${LINE_COUNT}
+
 echo ----------------------------------------------------------
 echo Finished
 echo ----------------------------------------------------------
