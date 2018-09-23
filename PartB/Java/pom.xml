@@ -1,14 +1,19 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.cs5253</groupId>
-  <artifactId>project1b</artifactId>
-  <version>0.1</version>
-  
-   	<properties>
-		 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		 <hadoop.version>2.7.3</hadoop.version>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.cs5253</groupId>
+	<artifactId>project1b</artifactId>
+	<version>0.1</version>
+	<build>
+		<finalName>wordcount</finalName>
+	</build>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<hadoop.version>2.7.3</hadoop.version>
 	</properties>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
@@ -17,5 +22,5 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-	
+
 </project>
