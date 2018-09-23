@@ -1,5 +1,4 @@
 import java.io.IOException;
-
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
@@ -8,23 +7,19 @@ import org.apache.hadoop.mapreduce.Mapper;
 /*
  *  Mapper class to obtain Item ID from click data
  *
- *	Input data format: Session Id, Timestamp, Item Id, Category
+ *	Input data format: Session Id, Timestamp, Item Id, Price, Quantity
  */
 
-public class ItemClickMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
-
-	private final static IntWritable one = new IntWritable(1);
-	
-	// Text object to store item Ids
-	private Text itemId = new Text();
+public class TimeBlocksMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
 
 	public void map(LongWritable key, Text input, Context context) throws IOException, InterruptedException {
 
-		// Get the itemId from the input string
+		// Get the hour and price from the input string
 		String[] fields = input.toString().split(",");
-		itemId.set(fields[2]);
-		
-		// Write itemId to context
-		context.write(itemId, one);
+		String hour = fields[1].split("T")[1].split(":")[0];
+		int price = Integer.valueOf(fields[3]);
+
+		// Write hour and price to context
+		context.write(new Text(hour), new IntWritable(price));
 	}
 }

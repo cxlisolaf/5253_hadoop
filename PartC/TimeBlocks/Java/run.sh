@@ -1,8 +1,8 @@
 #!/bin/bash
 
-INPUT_FILE=clicks.txt
-JAR_FILE=itemclick.jar
-CLASS=ItemClick
+INPUT_FILE=buys.txt
+JAR_FILE=timeblocks.jar
+CLASS=TimeBlocks
 LOCAL_INPUT=./input
 LOCAL_OUTPUT=./output
 HDFS_INPUT=/input

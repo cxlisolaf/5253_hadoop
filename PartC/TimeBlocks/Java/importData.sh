@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOWNLOAD_FILE=clicks.txt
+DOWNLOAD_FILE=buys.txt
 LOCAL_INPUT=./input
 
 # Remove old input data
