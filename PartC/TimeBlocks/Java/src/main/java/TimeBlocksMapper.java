@@ -12,14 +12,21 @@ import org.apache.hadoop.mapreduce.Mapper;
 
 public class TimeBlocksMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
 
+	// Objects to store item Ids
+	private Text hour = new Text();
+	private IntWritable price = new IntWritable();
+
 	public void map(LongWritable key, Text input, Context context) throws IOException, InterruptedException {
 
 		// Get the hour and price from the input string
 		String[] fields = input.toString().split(",");
-		String hour = fields[1].split("T")[1].split(":")[0];
-		int price = Integer.valueOf(fields[3]);
+		String hourField = fields[1].split("T")[1].split(":")[0];
+		int priceField = Integer.valueOf(fields[3]);
 
+		hour.set(hourField);
+		price.set(priceField);
+		
 		// Write hour and price to context
-		context.write(new Text(hour), new IntWritable(price));
+		context.write(hour, price);
 	}
 }
