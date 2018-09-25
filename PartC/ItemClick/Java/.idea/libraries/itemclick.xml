@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="itemclick">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/itemclick.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
