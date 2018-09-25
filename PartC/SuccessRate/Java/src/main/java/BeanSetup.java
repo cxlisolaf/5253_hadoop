@@ -10,8 +10,6 @@ public class BeanSetup implements Writable{
     private int click;
     private int buy;
 
-    // flag=0 is click, flag =1 is buy
-    private String flag;
 
     public BeanSetup(){
 
@@ -37,19 +35,14 @@ public class BeanSetup implements Writable{
         return buy;
     }
 
-    public void setFlag(String flag){
-        this.flag = flag;
-    }
-    public String getFlag(){
-        return flag;
-    }
+
 
     public void write(DataOutput output)
         throws IOException{
         output.writeInt(click);
         output.writeInt(buy);
         output.writeUTF(item_id);
-        output.writeUTF(flag);
+        //output.writeUTF(flag);
 
     }
 
@@ -58,7 +51,7 @@ public class BeanSetup implements Writable{
         this.item_id =  in.readUTF();
         this.click = in.readInt();
         this.buy = in.readInt();
-        this.flag = in.readUTF();
+        //this.flag = in.readUTF();
     }
 
 

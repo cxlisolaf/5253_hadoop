@@ -12,7 +12,7 @@ import org.apache.hadoop.io.FloatWritable;
  *  Reducer class sorting results in descending order
  */
 
-public class SuccessRateReducer extends Reducer<Text, Text, Text, Text> {
+public class SuccessRateReducer extends Reducer<Text, BeanSetup, Text, FloatWritable> {
 
 	// Set number of desired results (top n)git
 	private static final int NUM_RESULTS = 10;
@@ -27,28 +27,35 @@ public class SuccessRateReducer extends Reducer<Text, Text, Text, Text> {
 		float sum_click = 0;
 		float sum_buy = 0;
 
+
 		for (BeanSetup bean : beans) {
 
 			sum_buy += bean.getBuy();
 			sum_click += bean.getClick();
 
 		}
-
+/*
 		resultMap.put(sum_buy / sum_click, key.toString());
 
 		// Keep only top NUM_RESULTS entries
 		if (resultMap.size() > NUM_RESULTS) {
 			resultMap.descendingMap().remove(resultMap.firstKey());
 		}
+
+*/
+
+		float rate=sum_buy/sum_click;
+		context.write(key, new FloatWritable(rate));
 	}
 
+	/*
 	protected void cleanup(Context context) throws IOException, InterruptedException {
 		// Iterate results in descending order and write to context
 		for (Entry<Float, String> entry : resultMap.descendingMap().entrySet()) {
 			context.write(new Text(entry.getValue()), new Text(entry.getKey().toString()));
 		}
 	}
-
+*/
 
 }
 
