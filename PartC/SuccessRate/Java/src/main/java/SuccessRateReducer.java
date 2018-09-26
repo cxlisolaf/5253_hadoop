@@ -10,7 +10,7 @@ import org.apache.hadoop.io.FloatWritable;
 
 
 
-public class SuccessRateReducer extends Reducer<Text, BeanSetup, Text, FloatWritable> {
+public class SuccessRateReducer extends Reducer<Text, BeanSetup, Text, String> {
 
 	// Set number of desired results (top n)git
 	private static final int NUM_RESULTS = 10;
@@ -34,16 +34,16 @@ public class SuccessRateReducer extends Reducer<Text, BeanSetup, Text, FloatWrit
 
 		}
 
-		// Keep only top NUM_RESULTS entries
-		if (resultMap.size() > NUM_RESULTS) {
-			resultMap.descendingMap().remove(resultMap.firstKey());
-		}
-
 		if(sum_click != 0) {
 			rate = sum_buy / sum_click;
 		}
 
 		resultMap.put(rate, key.toString());
+
+		// Keep only top NUM_RESULTS entries
+		if (resultMap.size() > NUM_RESULTS) {
+			resultMap.descendingMap().remove(resultMap.firstKey());
+		}
 
 		//context.write(key, new FloatWritable(rate));
 	}
@@ -54,7 +54,7 @@ public class SuccessRateReducer extends Reducer<Text, BeanSetup, Text, FloatWrit
 
 			// Iterate results in descending order and write to context
 			for (Entry<Float, String> entry : resultMap.descendingMap().entrySet()) {
-				context.write(new Text(entry.getValue()), new FloatWritable(entry.getKey()));
+				context.write(new Text(entry.getValue()), new String(String.format("%0.2f", entry.getKey())));
 			}
 	}
 

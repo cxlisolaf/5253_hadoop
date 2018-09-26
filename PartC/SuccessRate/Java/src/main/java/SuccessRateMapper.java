@@ -27,7 +27,7 @@ public class SuccessRateMapper extends Mapper<LongWritable, Text, Text, BeanSetu
 
 		String i_id = "";
 
-		if(filename.startsWith("click")){
+		if(filename.startsWith("clicks")){
 			i_id = fields[2];
 			bean.set(i_id);
 			bean.setClick(1);
