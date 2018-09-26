@@ -34,7 +34,8 @@ public class SuccessRate extends Configured {
 
 		job.setMapperClass(SuccessRateMapper.class);
 		job.setReducerClass(SuccessRateReducer.class);
-
+		job.setNumReduceTasks(1);
+		
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(BeanSetup.class);
 

@@ -2,17 +2,20 @@ import java.io.IOException;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
-import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.FloatWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
-import org.apache.hadoop.io.FloatWritable;
 
 
 
 
 public class SuccessRateReducer extends Reducer<Text, BeanSetup, Text, FloatWritable> {
 
-	// Set number of desired results (top n)git
+	// Objects to store output data
+	private Text itemId = new Text();
+	private FloatWritable ratio = new FloatWritable();
+
+	// Set number of desired results (top n)
 	private static final int NUM_RESULTS = 10;
 
 	// Create a sorted TreeMap at class level to store the results
@@ -51,10 +54,12 @@ public class SuccessRateReducer extends Reducer<Text, BeanSetup, Text, FloatWrit
 	@Override
 	protected void cleanup(Context context)
 			throws IOException, InterruptedException {
-
+			
 			// Iterate results in descending order and write to context
 			for (Entry<Float, String> entry : resultMap.descendingMap().entrySet()) {
-				context.write(new Text(entry.getValue()), new FloatWritable(entry.getKey()));
+				itemId.set(entry.getValue());
+				ratio.set(entry.getKey());
+				context.write(itemId, ratio);
 			}
 	}
 
