@@ -8,9 +8,7 @@ import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.io.FloatWritable;
 
 
-/*
- *  Reducer class sorting results in descending order
- */
+
 
 public class SuccessRateReducer extends Reducer<Text, BeanSetup, Text, FloatWritable> {
 
@@ -26,6 +24,7 @@ public class SuccessRateReducer extends Reducer<Text, BeanSetup, Text, FloatWrit
 
 		float sum_click = 0;
 		float sum_buy = 0;
+		float rate = 0;
 
 
 		for (BeanSetup bean : beans) {
@@ -34,28 +33,31 @@ public class SuccessRateReducer extends Reducer<Text, BeanSetup, Text, FloatWrit
 			sum_click += bean.getClick();
 
 		}
-/*
-		resultMap.put(sum_buy / sum_click, key.toString());
 
 		// Keep only top NUM_RESULTS entries
 		if (resultMap.size() > NUM_RESULTS) {
 			resultMap.descendingMap().remove(resultMap.firstKey());
 		}
 
-*/
-
-		float rate=sum_buy/sum_click;
-		context.write(key, new FloatWritable(rate));
-	}
-
-	/*
-	protected void cleanup(Context context) throws IOException, InterruptedException {
-		// Iterate results in descending order and write to context
-		for (Entry<Float, String> entry : resultMap.descendingMap().entrySet()) {
-			context.write(new Text(entry.getValue()), new Text(entry.getKey().toString()));
+		if(sum_click != 0) {
+			rate = sum_buy / sum_click;
 		}
+
+		resultMap.put(rate, key.toString());
+
+		//context.write(key, new FloatWritable(rate));
 	}
-*/
+
+	@Override
+	protected void cleanup(Context context)
+			throws IOException, InterruptedException {
+
+			// Iterate results in descending order and write to context
+			for (Entry<Float, String> entry : resultMap.descendingMap().entrySet()) {
+				context.write(new Text(entry.getValue()), new FloatWritable(entry.getKey()));
+			}
+	}
+
 
 }
 

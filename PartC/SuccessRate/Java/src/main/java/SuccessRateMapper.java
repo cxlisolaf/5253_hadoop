@@ -1,10 +1,5 @@
 import java.io.IOException;
-import java.util.StringTokenizer;
-import java.util.ArrayList;
 
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.hadoop.hdfs.protocol.SnapshotInfo;
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
@@ -13,7 +8,6 @@ import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 /*
  *  Mapper class to obtain Item ID from click data
  *
- *	Input data format: Session Id, Timestamp, Item Id, Price, Quantity
  */
 
 public class SuccessRateMapper extends Mapper<LongWritable, Text, Text, BeanSetup> {
