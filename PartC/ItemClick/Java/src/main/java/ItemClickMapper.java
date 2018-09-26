@@ -17,14 +17,19 @@ public class ItemClickMapper extends Mapper<LongWritable, Text, Text, IntWritabl
 	
 	// Text object to store item Ids
 	private Text itemId = new Text();
-
+	String[] fields;
+	String month;
+	
 	public void map(LongWritable key, Text input, Context context) throws IOException, InterruptedException {
 
-		// Get the itemId from the input string
-		String[] fields = input.toString().split(",");
+		// Get the itemId and month from the input string
+		fields = input.toString().split(",");
 		itemId.set(fields[2]);
-		
+		month = fields[1].split("-")[1];
+
 		// Write itemId to context
-		context.write(itemId, one);
+		if (month.equals("04")) {
+			context.write(itemId, one);
+		}
 	}
 }

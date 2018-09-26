@@ -12,6 +12,10 @@ import org.apache.hadoop.mapreduce.Reducer;
 
 public class TimeBlocksReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
 
+	// Objects to store output data
+	private Text hour = new Text();
+	private IntWritable price = new IntWritable();
+
 	// Create a sorted TreeMap at class level to store the results
 	private TreeMap<Integer, String> resultMap = new TreeMap<Integer, String>();
 
@@ -31,7 +35,9 @@ public class TimeBlocksReducer extends Reducer<Text, IntWritable, Text, IntWrita
 	protected void cleanup(Context context) throws IOException, InterruptedException {
 		// Iterate results in descending order and write to context
 		for (Entry<Integer, String> entry : resultMap.descendingMap().entrySet()) {
-			context.write(new Text(entry.getValue()), new IntWritable(entry.getKey()));
+			hour.set(entry.getValue());
+			price.set(entry.getKey());
+			context.write(hour, price);
 		}
 	}
 }

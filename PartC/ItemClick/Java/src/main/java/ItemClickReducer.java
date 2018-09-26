@@ -12,6 +12,10 @@ import org.apache.hadoop.mapreduce.Reducer;
 
 public class ItemClickReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
 
+	// Objects to store output data
+	private Text itemId = new Text();
+	private IntWritable clicks = new IntWritable();
+
 	// Set number of desired results (top n)git 
 	private static final int NUM_RESULTS = 10;
 
@@ -39,7 +43,9 @@ public class ItemClickReducer extends Reducer<Text, IntWritable, Text, IntWritab
 	protected void cleanup(Context context) throws IOException, InterruptedException {
 		// Iterate results in descending order and write to context
 		for (Entry<Integer, String> entry : resultMap.descendingMap().entrySet()) {
-			context.write(new Text(entry.getValue()), new IntWritable(entry.getKey()));
+			itemId.set(entry.getValue());
+			clicks.set(entry.getKey());
+			context.write(itemId, clicks);
 		}
 	}
 }

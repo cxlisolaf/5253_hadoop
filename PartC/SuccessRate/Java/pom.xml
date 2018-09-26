@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.cs5253</groupId>
-    <artifactId>project1c-itemClick</artifactId>
+    <artifactId>project1c-successRate</artifactId>
     <version>0.1</version>
     <build>
         <finalName>SuccessRate</finalName>

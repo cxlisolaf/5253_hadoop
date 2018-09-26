@@ -1,11 +1,11 @@
 #!/bin/bash
 
 INPUT_FILE1=clicks.txt
-INPUT_FILE2 = buys.txt
+INPUT_FILE2=buys.txt
 JAR_FILE=SuccessRate.jar
 CLASS=SuccessRate
 LOCAL_INPUT=./input
-LOCAL_OUTPUT=./output
+LOCAL_OUTPUT=./output.txt
 HDFS_INPUT=/input
 HDFS_OUTPUT=/output
 
@@ -25,6 +25,7 @@ echo ----------------------------------------------------------
 echo Copying input file to hdfs...
 hadoop fs -copyFromLocal ${LOCAL_INPUT}/${INPUT_FILE1} ${HDFS_INPUT}
 hadoop fs -copyFromLocal ${LOCAL_INPUT}/${INPUT_FILE2} ${HDFS_INPUT}
+
 # Run Hadoop job
 echo ----------------------------------------------------------
 echo Running Hadoop job...
