@@ -9,12 +9,12 @@ Leave this part as-is:
 
 Grade
 
-Part A:
+Part A: 20
 
-Part B:
+Part B: 40
 
-Part C:
+Part C: 40
 
-Total: 
+Total:  100
 
 Grader notes:
